@@ -67,17 +67,29 @@ class _AddSubscriptionState extends State<AddSubscription> {
                           ),
                         ),
                         Divider(),
-                        TextField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Select date',
-                            hintStyle: TextStyle(
-                              color: Colors.white30,
-                              fontSize: 20.0,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            ElevatedButton(
+                                onPressed: () => _selectDate(context),
+                                child: Text(
+                                  'Pick date',
+                                  style: TextStyle(
+                                    fontSize: 15.0
+                                  ),
+                                )
                             ),
-                          ),
-                          style: TextStyle(color: Colors.white, fontSize: 20.0),
-                          onTap: () => _selectDate(context),
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            Text(
+                              "${selectedDate.toLocal()}".split(' ')[0],
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0
+                              ),
+                            )
+                          ],
                         )
                       ],
                     )),
