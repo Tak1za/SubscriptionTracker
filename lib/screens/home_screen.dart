@@ -28,13 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
           centerTitle: true,
           title: Text(
             'Subscriptions',
-            style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
           ),
           elevation: 0.0,
           actions: <Widget>[
             IconButton(
                 icon: Icon(Icons.add),
-                iconSize: 30.0,
+                iconSize: 25.0,
                 color: Colors.white,
                 onPressed: () {
                   Navigator.push(

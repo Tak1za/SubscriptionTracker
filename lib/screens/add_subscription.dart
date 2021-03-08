@@ -44,7 +44,7 @@ class _AddSubscriptionState extends State<AddSubscription> {
               children: <Widget>[
                 Container(
                     child: Padding(
-                  padding: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(30.0),
                   child: Text(
                     'Add Subscription',
                     style: TextStyle(
@@ -56,79 +56,86 @@ class _AddSubscriptionState extends State<AddSubscription> {
                 Expanded(
                     child: Container(
                   decoration: BoxDecoration(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(40.0),
-                        topRight: Radius.circular(40.0),
+                        topLeft: Radius.circular(50.0),
+                        topRight: Radius.circular(50.0),
                       )),
                   width: double.infinity,
                   child: Padding(
                       padding: EdgeInsets.all(20.0),
                       child: Column(
                         children: <Widget>[
-                          TextField(
-                            autofocus: true,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                                borderSide: BorderSide(
+                          Container(
+                            height: 60.0,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50.0)),
+                                    borderSide: BorderSide(
+                                      color: Colors.white30,
+                                    )),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50.0)),
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2.0)),
+                                hintText: 'Enter service name',
+                                hintStyle: TextStyle(
                                   color: Colors.white30,
-                                )
+                                  fontSize: 20.0,
+                                ),
+                                contentPadding: EdgeInsets.only(left: 20.0),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                                borderSide: BorderSide(
-                                  color: Colors.black87,
-                                  width: 2.0
-                                )
-                              ),
-                              hintText: 'Enter service name',
-                              hintStyle: TextStyle(
-                                color: Colors.white30,
+                              style: TextStyle(
+                                color: Colors.white,
                                 fontSize: 20.0,
                               ),
                             ),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.0,
-                            ),
                           ),
-                          SizedBox(height: 25.0),
+                          SizedBox(height: 15.0),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               ImageIcon(
                                 AssetImage("assets/images/rupee.png"),
                                 color: Colors.white30,
-                                size: 20.0,
+                                size: 30.0,
                               ),
-                              SizedBox(width: 5.0),
+                              SizedBox(width: 20.0),
                               Expanded(
-                                child: TextField(
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                                child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  height: 60.0,
+                                  child: TextField(
+                                    keyboardType: TextInputType.number,
+                                    decoration: InputDecoration(
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50.0)),
                                         borderSide: BorderSide(
                                           color: Colors.white30,
-                                        )
+                                        ),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(50.0)),
+                                          borderSide: BorderSide(
+                                              color: Colors.black87,
+                                              width: 2.0)),
+                                      hintText: 'Enter cost',
+                                      hintStyle: TextStyle(
+                                        color: Colors.white30,
+                                        fontSize: 20.0,
+                                      ),
+                                      contentPadding:
+                                          EdgeInsets.only(left: 20.0),
                                     ),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                                        borderSide: BorderSide(
-                                            color: Colors.black87,
-                                            width: 2.0
-                                        )
-                                    ),
-                                    hintText: 'Enter cost',
-                                    hintStyle: TextStyle(
-                                      color: Colors.white30,
+                                    style: TextStyle(
+                                      color: Colors.white,
                                       fontSize: 20.0,
                                     ),
-                                  ),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
                                   ),
                                 ),
                               ),
@@ -136,44 +143,96 @@ class _AddSubscriptionState extends State<AddSubscription> {
                           ),
                           SizedBox(height: 25.0),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              ElevatedButton(
-                                  onPressed: () => _selectDate(context),
-                                  child: Text(
-                                    'Start Date',
-                                    style: TextStyle(fontSize: 15.0),
-                                  )),
-                              SizedBox(
-                                width: 20.0,
+                              IconButton(
+                                icon: Icon(
+                                  Icons.date_range,
+                                  size: 30.0,
+                                  color: Colors.white30,
+                                ),
+                                padding: EdgeInsets.all(0.0),
+                                constraints: BoxConstraints(),
+                                onPressed: () => _selectDate(context),
                               ),
-                              Text(
-                                DateFormat.yMMMMd().format(selectedDate),
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20.0),
-                              ),
+                              SizedBox(width: 25.0),
+                              Expanded(
+                                  child: Container(
+                                height: 50.0,
+                                padding: EdgeInsets.only(left: 20.0),
+                                alignment: Alignment.centerLeft,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.white30,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40.0)),
+                                ),
+                                child: Text(
+                                  DateFormat.yMMMMd().format(selectedDate),
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )),
                             ],
                           ),
                           SizedBox(height: 25.0),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              ElevatedButton(
-                                  onPressed: () => _selectSubscriptionPeriodPicker(context),
-                                  child: Text(
-                                    'Pick Subscription Period',
-                                    style: TextStyle(fontSize: 15.0),
-                                  )),
-                              SizedBox(
-                                width: 20.0,
+                              IconButton(
+                                icon: Icon(
+                                  Icons.list,
+                                  size: 30.0,
+                                  color: Colors.white30,
+                                ),
+                                padding: EdgeInsets.all(0.0),
+                                constraints: BoxConstraints(),
+                                onPressed: () =>
+                                    _selectSubscriptionPeriodPicker(context),
                               ),
-                              Text(
-                                selectedSubscriptionPeriod,
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20.0),
-                              ),
+                              SizedBox(width: 25.0),
+                              Expanded(
+                                  child: Container(
+                                height: 50.0,
+                                padding: EdgeInsets.only(left: 20.0),
+                                alignment: Alignment.centerLeft,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.white30,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40.0)),
+                                ),
+                                child: Text(
+                                  selectedSubscriptionPeriod,
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )),
                             ],
                           ),
+                          SizedBox(height: 35.0),
+                          Container(
+                            width: double.infinity,
+                            height: 50.0,
+                            child: ElevatedButton.icon(
+                              onPressed: () => print('pressed'), 
+                              icon: Icon(Icons.check), 
+                              label: Text(
+                                'Submit'
+                              ),
+                              style: ButtonStyle(
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(40.0))
+                                  )
+                                )
+                              ),
+                            ),
+                          )
                         ],
                       )),
                 ))
