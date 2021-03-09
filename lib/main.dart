@@ -17,12 +17,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Subscriber',
         debugShowCheckedModeBanner: false,
-        theme:
-            ThemeData(
-              primaryColor: _primaryColor, 
-              accentColor: _accentColor,
-              scaffoldBackgroundColor: _formBackgroundColor,
-              ),
+        theme: ThemeData(
+          primaryColor: _primaryColor,
+          accentColor: _accentColor,
+          scaffoldBackgroundColor: _formBackgroundColor,
+        ),
         home: HomeScreen(),
       ),
     );
