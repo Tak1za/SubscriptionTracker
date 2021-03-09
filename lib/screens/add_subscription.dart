@@ -41,48 +41,43 @@ class _AddSubscriptionState extends State<AddSubscription> {
         elevation: 0.0,
       ),
       body: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height,
-          ),
-          child: Column(
-            children: <Widget>[
-              AddSubscriptionHeader(),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50.0),
-                      topRight: Radius.circular(50.0),
-                    ),
-                  ),
-                  width: double.infinity,
-                  child: Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: Column(
-                      children: <Widget>[
-                        ServiceName(),
-                        SizedBox(height: 20.0),
-                        SubscriptionCost(),
-                        SizedBox(height: 30.0),
-                        PaymentDate(
-                          _selectedDate,
-                        ),
-                        SizedBox(height: 30.0),
-                        SubscriptionPeriod(
-                          _selectedSubscriptionPeriod,
-                          _subscriptionPeriods,
-                        ),
-                        SizedBox(height: 50.0),
-                        SubmitButton(),
-                      ],
-                    ),
-                  ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            AddSubscriptionHeader(),
+            Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50.0),
+                  topRight: Radius.circular(50.0),
                 ),
-              )
-            ],
-          ),
+              ),
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Column(
+                  children: <Widget>[
+                    ServiceName(),
+                    SizedBox(height: 20.0),
+                    SubscriptionCost(),
+                    SizedBox(height: 30.0),
+                    PaymentDate(
+                      _selectedDate,
+                    ),
+                    SizedBox(height: 30.0),
+                    SubscriptionPeriod(
+                      _selectedSubscriptionPeriod,
+                      _subscriptionPeriods,
+                    ),
+                    SizedBox(height: 50.0),
+                    SubmitButton(),
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
