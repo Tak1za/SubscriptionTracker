@@ -7,7 +7,8 @@ void main() {
 
 class MyApp extends StatelessWidget {
   static const _primaryColor = Color(0xFF000000);
-  static const _accentColor = Color(0xFF242424);
+  static const _accentColor = Color(0xFF1976D2);
+  static const _selectedColor = Colors.blue;
   static const _formBackgroundColor = Color(0xFF232323);
   // This widget is the root of your application.
   @override
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
           primaryColor: _primaryColor,
           accentColor: _accentColor,
           scaffoldBackgroundColor: _formBackgroundColor,
+          selectedRowColor: _selectedColor,
         ),
         home: HomeScreen(),
       ),

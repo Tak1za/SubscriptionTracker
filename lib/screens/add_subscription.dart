@@ -42,8 +42,9 @@ class _AddSubscriptionState extends State<AddSubscription> {
       ),
       body: SingleChildScrollView(
         child: ConstrainedBox(
-          constraints:
-              BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height,
+          ),
           child: Column(
             children: <Widget>[
               AddSubscriptionHeader(),
@@ -73,7 +74,7 @@ class _AddSubscriptionState extends State<AddSubscription> {
                           _selectedSubscriptionPeriod,
                           _subscriptionPeriods,
                         ),
-                        SizedBox(height: 30.0),
+                        SizedBox(height: 50.0),
                         SubmitButton(),
                       ],
                     ),

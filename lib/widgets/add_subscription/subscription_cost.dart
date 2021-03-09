@@ -27,7 +27,7 @@ class SubscriptionCost extends StatelessWidget {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(50.0)),
                   borderSide: BorderSide(
-                    color: Colors.white30,
+                    color: Theme.of(context).accentColor,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
@@ -35,7 +35,7 @@ class SubscriptionCost extends StatelessWidget {
                     Radius.circular(50.0),
                   ),
                   borderSide: BorderSide(
-                    color: Colors.black87,
+                    color: Theme.of(context).selectedRowColor,
                     width: 2.0,
                   ),
                 ),

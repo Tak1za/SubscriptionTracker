@@ -30,17 +30,18 @@ class _PaymentDateState extends State<PaymentDate> {
           ),
           SizedBox(width: 25.0),
           Expanded(
-            child: Container(
-              height: 50.0,
-              padding: EdgeInsets.only(left: 20.0),
-              alignment: Alignment.centerLeft,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.white30,
+            child: GestureDetector(
+              onTap: () => _selectDate(context),
+              child: Container(
+                height: 50.0,
+                padding: EdgeInsets.only(left: 20.0),
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(context).accentColor,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(40.0)),
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(40.0)),
-              ),
-              child: GestureDetector(
                 child: Text(
                   DateFormat.yMMMMd().format(widget._selectedDate),
                   style: TextStyle(
@@ -48,7 +49,6 @@ class _PaymentDateState extends State<PaymentDate> {
                     color: Colors.white,
                   ),
                 ),
-                onTap: () => _selectDate(context),
               ),
             ),
           ),

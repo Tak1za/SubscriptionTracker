@@ -13,17 +13,22 @@ class ServiceName extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(50.0),
-              ),
-              borderSide: BorderSide(
-                color: Colors.white30,
-              )),
+            borderRadius: BorderRadius.all(
+              Radius.circular(50.0),
+            ),
+            borderSide: BorderSide(
+              color: Theme.of(context).accentColor,
+            ),
+          ),
           focusedBorder: OutlineInputBorder(
-              borderRadius:
-              BorderRadius.all(Radius.circular(50.0)),
-              borderSide: BorderSide(
-                  color: Colors.black87, width: 2.0)),
+            borderRadius: BorderRadius.all(
+              Radius.circular(50.0),
+            ),
+            borderSide: BorderSide(
+              color: Theme.of(context).selectedRowColor,
+              width: 2.0,
+            ),
+          ),
           hintText: 'Enter service name',
           hintStyle: TextStyle(
             color: Colors.white30,
