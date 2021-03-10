@@ -16,45 +16,57 @@ class AddSubscription extends StatefulWidget {
 class _AddSubscriptionState extends State<AddSubscription> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          iconSize: 30.0,
-          color: Colors.white,
-          onPressed: () {
-            Navigator.pop(context);
-          },
+    String swipeDirection;
+
+    return GestureDetector(
+      onPanUpdate: (details) {
+        swipeDirection = details.delta.dx < 0 ? 'left' : 'right';
+      },
+      onPanEnd: (details) {
+        if (swipeDirection == 'right') {
+          Navigator.pop(context);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            iconSize: 30.0,
+            color: Colors.white,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          centerTitle: true,
+          elevation: 0.0,
         ),
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: Column(
-        children: <Widget>[
-          AddSubscriptionHeader(),
-          Expanded(
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              child: SingleChildScrollView(
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50.0),
-                      topRight: Radius.circular(50.0),
+        body: Column(
+          children: <Widget>[
+            AddSubscriptionHeader(),
+            Expanded(
+              child: Container(
+                alignment: Alignment.bottomCenter,
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50.0),
+                        topRight: Radius.circular(50.0),
+                      ),
                     ),
+                    width: double.infinity,
+                    child: Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: AddSubscriptionForm()),
                   ),
-                  width: double.infinity,
-                  child: Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: AddSubscriptionForm()),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -23,50 +23,68 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.close_rounded),
-          iconSize: 30.0,
-          color: Colors.white,
-          onPressed: () {
-            SystemNavigator.pop(animated: true);
-          },
-        ),
-        elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            iconSize: 35.0,
+    String swipeDirection;
+
+    return GestureDetector(
+      onPanUpdate: (details) {
+        swipeDirection = details.delta.dx < 0 ? 'left' : 'right';
+      },
+      onPanEnd: (details) {
+        if (swipeDirection == 'left') {
+          Navigator.push(
+            context,
+            PageTransition(
+              type: PageTransitionType.rightToLeft,
+              child: AddSubscription(),
+            ),
+          );
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.close_rounded),
+            iconSize: 30.0,
             color: Colors.white,
             onPressed: () {
-              Navigator.push(
-                context,
-                PageTransition(
-                  type: PageTransitionType.rightToLeft,
-                  child: AddSubscription(),
-                ),
-              );
+              SystemNavigator.pop(animated: true);
             },
-          )
-        ],
-      ),
-      body: Column(
-        children: <Widget>[
-          AllSubscriptionsHeader(),
-          Expanded(
-            child: Container(
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: _subscriptions.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return SubscriptionCard(_subscriptions[index]);
-                },
+          ),
+          elevation: 0.0,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              iconSize: 35.0,
+              color: Colors.white,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  PageTransition(
+                    type: PageTransitionType.rightToLeft,
+                    child: AddSubscription(),
+                  ),
+                );
+              },
+            )
+          ],
+        ),
+        body: Column(
+          children: <Widget>[
+            AllSubscriptionsHeader(),
+            Expanded(
+              child: Container(
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: _subscriptions.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return SubscriptionCard(_subscriptions[index]);
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
