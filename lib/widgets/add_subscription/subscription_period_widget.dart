@@ -1,21 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_pickers/helpers/show_scroll_picker.dart';
+import 'package:subscriber/models/subscription.dart';
 
-class SubscriptionPeriod extends StatefulWidget {
-  String _selectedPeriod;
-  List<String> _subscriptionPeriods;
+class SubscriptionPeriodWidget extends StatefulWidget {
+  String selectedSubscriptionPeriod;
+  Subscription subscription;
 
-  SubscriptionPeriod(String selectedPeriod, List<String> subscriptionPeriods) {
-    this._selectedPeriod = selectedPeriod;
-    this._subscriptionPeriods = subscriptionPeriods;
-  }
+  SubscriptionPeriodWidget(
+      {Key key,
+      this.selectedSubscriptionPeriod,
+      @required this.subscription})
+      : super(key: key);
 
   @override
-  _SubscriptionPeriodState createState() => _SubscriptionPeriodState();
+  _SubscriptionPeriodWidgetState createState() =>
+      _SubscriptionPeriodWidgetState();
 }
 
-class _SubscriptionPeriodState extends State<SubscriptionPeriod> {
+class _SubscriptionPeriodWidgetState extends State<SubscriptionPeriodWidget> {
+  final List<String> _subscriptionPeriods = <String>[
+    "Daily",
+    "Alternate",
+    "Weekly",
+    "Monthly",
+    "Biannual",
+    "Annually",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +57,7 @@ class _SubscriptionPeriodState extends State<SubscriptionPeriod> {
                   borderRadius: BorderRadius.all(Radius.circular(40.0)),
                 ),
                 child: Text(
-                  widget._selectedPeriod,
+                  widget.selectedSubscriptionPeriod,
                   style: TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
@@ -63,9 +75,13 @@ class _SubscriptionPeriodState extends State<SubscriptionPeriod> {
     showMaterialScrollPicker(
       context: context,
       title: "Subscription Period",
-      items: widget._subscriptionPeriods,
-      selectedItem: widget._selectedPeriod,
-      onChanged: (value) => setState(() => widget._selectedPeriod = value),
+      items: _subscriptionPeriods,
+      selectedItem: widget.selectedSubscriptionPeriod,
+      onChanged: (value) => setState(() {
+        widget.selectedSubscriptionPeriod = value;
+        widget.subscription.subscriptionPeriod =
+            widget.selectedSubscriptionPeriod;
+      }),
     );
   }
 }

@@ -1,7 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:subscriber/models/subscription.dart';
 
 class SubscriptionCost extends StatelessWidget {
+  Subscription subscription;
+  FocusNode focusSubscriptionCost;
+
+  SubscriptionCost({
+    Key key,
+    @required this.subscription,
+    this.focusSubscriptionCost,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -21,7 +31,16 @@ class SubscriptionCost extends StatelessWidget {
           child: Container(
             alignment: Alignment.centerLeft,
             height: 50.0,
-            child: TextField(
+            child: TextFormField(
+              validator: (String value) {
+                if (int.tryParse(value) == 0 || value.isEmpty) {
+                  return 'This is not a valid value';
+                }
+              },
+              onSaved: (String value) {
+                subscription.subscriptionCost = int.tryParse(value);
+              },
+              focusNode: focusSubscriptionCost,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(

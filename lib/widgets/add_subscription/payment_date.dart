@@ -1,13 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:subscriber/models/subscription.dart';
 
 class PaymentDate extends StatefulWidget {
-  DateTime _selectedDate;
+  DateTime selectedDate;
+  Subscription subscription;
 
-  PaymentDate(DateTime selectedDate) {
-    this._selectedDate = selectedDate;
-  }
+  PaymentDate({
+    Key key,
+    @required this.selectedDate,
+    this.subscription,
+  }) : super(key: key);
 
   @override
   _PaymentDateState createState() => _PaymentDateState();
@@ -43,7 +47,7 @@ class _PaymentDateState extends State<PaymentDate> {
                   borderRadius: BorderRadius.all(Radius.circular(40.0)),
                 ),
                 child: Text(
-                  DateFormat.yMMMMd().format(widget._selectedDate),
+                  DateFormat.yMMMMd().format(widget.selectedDate),
                   style: TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
@@ -60,13 +64,14 @@ class _PaymentDateState extends State<PaymentDate> {
   _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
-      initialDate: widget._selectedDate,
+      initialDate: widget.selectedDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
     );
-    if (picked != null && picked != widget._selectedDate)
+    if (picked != null && picked != widget.selectedDate)
       setState(() {
-        widget._selectedDate = picked;
+        widget.selectedDate = picked;
+        widget.subscription.paymentDate = widget.selectedDate;
       });
   }
 }

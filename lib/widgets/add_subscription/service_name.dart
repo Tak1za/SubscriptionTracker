@@ -1,16 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:subscriber/models/subscription.dart';
 
 class ServiceName extends StatelessWidget {
-  const ServiceName({
-    Key key,
-  }) : super(key: key);
+  Subscription subscription;
+  FocusNode focusSubscriptionCost;
+
+  ServiceName({Key key, @required this.subscription, this.focusSubscriptionCost}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 60.0,
-      child: TextField(
+      child: TextFormField(
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'This is not a valid value';
+          }
+        },
+        onFieldSubmitted: (v) {
+          FocusScope.of(context).requestFocus(focusSubscriptionCost);
+        },
+        onSaved: (String value) {
+          subscription.serviceName = value;
+        },
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(

@@ -1,29 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:subscriber/models/subscription.dart';
 import 'file:///D:/Development/AndroidStudioProjects/subscriber/lib/widgets/add_subscription/add_subscription_header.dart';
-import 'file:///D:/Development/AndroidStudioProjects/subscriber/lib/widgets/add_subscription/service_name.dart';
-import 'file:///D:/Development/AndroidStudioProjects/subscriber/lib/widgets/add_subscription/subscription_cost.dart';
-import 'file:///D:/Development/AndroidStudioProjects/subscriber/lib/widgets/add_subscription/subscription_period.dart';
-import 'package:subscriber/widgets/add_subscription/payment_date.dart';
-import 'package:subscriber/widgets/add_subscription/submit_button.dart';
+import 'package:subscriber/widgets/forms/add_subscription_form.dart';
 
 class AddSubscription extends StatefulWidget {
+
+  List<Subscription> subscriptions;
+
+  AddSubscription({this.subscriptions});
+
   @override
   _AddSubscriptionState createState() => _AddSubscriptionState();
 }
 
-class _AddSubscriptionState extends State<AddSubscription> {
-  DateTime _selectedDate = DateTime.now();
-  String _selectedSubscriptionPeriod = "Monthly";
-  List<String> _subscriptionPeriods = <String>[
-    "Daily",
-    "Alternate Day",
-    "Weekly",
-    "Monthly",
-    "Half Yearly",
-    "Annually",
-  ];
-
+class _AddSubscriptionState extends State<AddSubscription>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,24 +48,7 @@ class _AddSubscriptionState extends State<AddSubscription> {
               width: double.infinity,
               child: Padding(
                 padding: EdgeInsets.all(20.0),
-                child: Column(
-                  children: <Widget>[
-                    ServiceName(),
-                    SizedBox(height: 20.0),
-                    SubscriptionCost(),
-                    SizedBox(height: 30.0),
-                    PaymentDate(
-                      _selectedDate,
-                    ),
-                    SizedBox(height: 30.0),
-                    SubscriptionPeriod(
-                      _selectedSubscriptionPeriod,
-                      _subscriptionPeriods,
-                    ),
-                    SizedBox(height: 50.0),
-                    SubmitButton(),
-                  ],
-                ),
+                child: AddSubscriptionForm()
               ),
             )
           ],
