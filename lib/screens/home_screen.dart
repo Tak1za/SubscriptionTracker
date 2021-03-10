@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:subscriber/screens/add_subscription.dart';
 import 'package:subscriber/widgets/headers/all_subscriptions_header.dart';
 import 'package:subscriber/widgets/subscription_card.dart';
@@ -42,7 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AddSubscription()),
+                PageTransition(
+                  type: PageTransitionType.rightToLeft,
+                  child: AddSubscription(),
+                ),
               );
             },
           )

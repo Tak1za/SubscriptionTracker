@@ -27,6 +27,7 @@ dependencies:
   flutter_picker:
     git: git://github.com/yangyxd/flutter_picker.git
   flutter_material_pickers: ^1.9.2
+  page_transition: ^1.1.7+6
 
 
   # The following adds the Cupertino Icons font to your application.
