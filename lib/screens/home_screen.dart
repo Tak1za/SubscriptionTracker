@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:subscriber/screens/add_subscription.dart';
+import 'package:subscriber/widgets/headers/all_subscriptions_header.dart';
 import 'package:subscriber/widgets/subscription_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,23 +20,24 @@ class _HomeScreenState extends State<HomeScreen> {
     "Hotstar",
     "Sony Liv"
   ];
-  static const _primaryColor = Color(0xFF000000);
-  static const _secondaryColor = Color(0xFF242424);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Subscriptions',
-          style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+        leading: IconButton(
+          icon: Icon(Icons.close_rounded),
+          iconSize: 30.0,
+          color: Colors.white,
+          onPressed: () {
+            SystemNavigator.pop(animated: true);
+          },
         ),
         elevation: 0.0,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            iconSize: 25.0,
+            iconSize: 35.0,
             color: Colors.white,
             onPressed: () {
               Navigator.push(
@@ -45,28 +48,21 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [_primaryColor, _secondaryColor])),
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 30.0),
-            Expanded(
-              child: Container(
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: _subscriptions.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SubscriptionCard(_subscriptions[index]);
-                  },
-                ),
+      body: Column(
+        children: <Widget>[
+          AllSubscriptionsHeader(),
+          Expanded(
+            child: Container(
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: _subscriptions.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SubscriptionCard(_subscriptions[index]);
+                },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
