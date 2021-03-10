@@ -31,27 +31,30 @@ class _AddSubscriptionState extends State<AddSubscription>{
         centerTitle: true,
         elevation: 0.0,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            AddSubscriptionHeader(),
-            Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(50.0),
-                  topRight: Radius.circular(50.0),
+      body: Align(
+        alignment: Alignment.bottomCenter,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              AddSubscriptionHeader(),
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(50.0),
+                    topRight: Radius.circular(50.0),
+                  ),
                 ),
-              ),
-              width: double.infinity,
-              child: Padding(
-                padding: EdgeInsets.all(20.0),
-                child: AddSubscriptionForm()
-              ),
-            )
-          ],
+                width: double.infinity,
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: AddSubscriptionForm()
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
