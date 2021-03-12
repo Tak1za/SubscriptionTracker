@@ -3,24 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:subscriber/screens/add_subscription.dart';
+import 'package:subscriber/widgets/all_subscriptions/all_subscriptions_list.dart';
 import 'package:subscriber/widgets/headers/all_subscriptions_header.dart';
-import 'package:subscriber/widgets/subscription_card.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final List<String> _subscriptions = [
-    "Google One",
-    "Spotify",
-    "Xbox",
-    "Netflix",
-    "Amazon Prime",
-    "Hotstar",
-    "Sony Liv"
-  ];
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String swipeDirection;
@@ -72,17 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Column(
           children: <Widget>[
             AllSubscriptionsHeader(),
-            Expanded(
-              child: Container(
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: _subscriptions.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SubscriptionCard(_subscriptions[index]);
-                  },
-                ),
-              ),
-            ),
+            AllSubscriptionList(),
           ],
         ),
       ),

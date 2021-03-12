@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SubscriptionCard extends StatelessWidget {
-  final String _subscription;
+  final String subscription;
 
-  SubscriptionCard(this._subscription);
+  SubscriptionCard({Key key, @required this.subscription}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class SubscriptionCard extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(20.0),
           child: Text(
-            _subscription,
+            subscription,
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,

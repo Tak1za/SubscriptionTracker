@@ -1,19 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:subscriber/models/subscription.dart';
-import 'file:///D:/Development/AndroidStudioProjects/subscriber/lib/widgets/headers/add_subscription_header.dart';
 import 'package:subscriber/widgets/forms/add_subscription_form.dart';
 
-class AddSubscription extends StatefulWidget {
-  List<Subscription> subscriptions;
+import '../widgets/headers/add_subscription_header.dart';
 
-  AddSubscription({this.subscriptions});
-
-  @override
-  _AddSubscriptionState createState() => _AddSubscriptionState();
-}
-
-class _AddSubscriptionState extends State<AddSubscription> {
+class AddSubscription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String swipeDirection;
@@ -41,31 +32,16 @@ class _AddSubscriptionState extends State<AddSubscription> {
           centerTitle: true,
           elevation: 0.0,
         ),
-        body: Column(
-          children: <Widget>[
-            AddSubscriptionHeader(),
-            Expanded(
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                child: SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50.0),
-                        topRight: Radius.circular(50.0),
-                      ),
-                    ),
-                    width: double.infinity,
-                    child: Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: AddSubscriptionForm()),
-                  ),
-                ),
-              ),
-            )
-          ],
+        body: SingleChildScrollView(
+          child: Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                AddSubscriptionHeader(),
+                AddSubscriptionForm(),
+              ],
+            ),
+          ),
         ),
       ),
     );

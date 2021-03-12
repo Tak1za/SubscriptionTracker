@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:subscriber/models/subscription.dart';
 
 class SubscriptionCost extends StatelessWidget {
-  Subscription subscription;
-  FocusNode focusSubscriptionCost;
+  final Subscription subscription;
+  final FocusNode focusSubscriptionCost;
 
   SubscriptionCost({
     Key key,
@@ -32,6 +32,7 @@ class SubscriptionCost extends StatelessWidget {
             alignment: Alignment.centerLeft,
             height: 50.0,
             child: TextFormField(
+              // ignore: missing_return
               validator: (String value) {
                 if (int.tryParse(value) == 0 || value.isEmpty) {
                   return 'This is not a valid value';

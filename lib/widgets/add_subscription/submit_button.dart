@@ -1,23 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:subscriber/models/subscription.dart';
+import 'package:subscriber/state/state_manager.dart';
 
 class SubmitButton extends StatelessWidget {
-  GlobalKey<FormState> formKey;
-  Subscription subscription;
-  DateTime selectedDate;
-  String selectedSubscriptionPeriod;
+  final GlobalKey<FormState> formKey;
+  final Subscription subscription;
+  final DateTime selectedDate;
+  final String selectedSubscriptionPeriod;
 
-  SubmitButton(
-      {Key key,
-      @required this.formKey,
-      this.selectedDate,
-      this.selectedSubscriptionPeriod,
-      this.subscription})
-      : super(key: key);
+  SubmitButton({
+    Key key,
+    @required this.formKey,
+    this.selectedDate,
+    this.selectedSubscriptionPeriod,
+    this.subscription,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var stateManager = Provider.of<StateManager>(context, listen: false);
     return Container(
       width: double.infinity,
       height: 50.0,
@@ -25,12 +28,8 @@ class SubmitButton extends StatelessWidget {
         onPressed: () {
           if (formKey.currentState.validate()) {
             formKey.currentState.save();
-            print("Service Name: " + subscription.serviceName);
-            print("Subscription Cost: " +
-                subscription.subscriptionCost.toString());
-            print("Subscription Payment Date: " +
-                subscription.paymentDate.toString());
-            print("Subscription Period: " + subscription.subscriptionPeriod);
+            stateManager.addSubscription(subscription);
+            Navigator.pop(context);
           }
         },
         icon: Icon(Icons.check),

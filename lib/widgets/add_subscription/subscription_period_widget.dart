@@ -4,14 +4,14 @@ import 'package:flutter_material_pickers/helpers/show_scroll_picker.dart';
 import 'package:subscriber/models/subscription.dart';
 
 class SubscriptionPeriodWidget extends StatefulWidget {
-  String selectedSubscriptionPeriod;
-  Subscription subscription;
+  final String selectedSubscriptionPeriod;
+  final Subscription subscription;
 
-  SubscriptionPeriodWidget(
-      {Key key,
-      this.selectedSubscriptionPeriod,
-      @required this.subscription})
-      : super(key: key);
+  SubscriptionPeriodWidget({
+    Key key,
+    this.selectedSubscriptionPeriod,
+    @required this.subscription,
+  }) : super(key: key);
 
   @override
   _SubscriptionPeriodWidgetState createState() =>
@@ -27,6 +27,13 @@ class _SubscriptionPeriodWidgetState extends State<SubscriptionPeriodWidget> {
     "Biannual",
     "Annually",
   ];
+  String _selectedSubscriptionPeriod;
+
+  @override
+  void initState() {
+    _selectedSubscriptionPeriod = widget.selectedSubscriptionPeriod;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +64,7 @@ class _SubscriptionPeriodWidgetState extends State<SubscriptionPeriodWidget> {
                   borderRadius: BorderRadius.all(Radius.circular(40.0)),
                 ),
                 child: Text(
-                  widget.selectedSubscriptionPeriod,
+                  _selectedSubscriptionPeriod,
                   style: TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
@@ -78,9 +85,8 @@ class _SubscriptionPeriodWidgetState extends State<SubscriptionPeriodWidget> {
       items: _subscriptionPeriods,
       selectedItem: widget.selectedSubscriptionPeriod,
       onChanged: (value) => setState(() {
-        widget.selectedSubscriptionPeriod = value;
-        widget.subscription.subscriptionPeriod =
-            widget.selectedSubscriptionPeriod;
+        _selectedSubscriptionPeriod = value;
+        widget.subscription.subscriptionPeriod = _selectedSubscriptionPeriod;
       }),
     );
   }

@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:subscriber/models/subscription.dart';
 
 class PaymentDate extends StatefulWidget {
-  DateTime selectedDate;
-  Subscription subscription;
+  final DateTime selectedDate;
+  final Subscription subscription;
 
   PaymentDate({
     Key key,
@@ -18,6 +18,14 @@ class PaymentDate extends StatefulWidget {
 }
 
 class _PaymentDateState extends State<PaymentDate> {
+  DateTime _selectedDate;
+
+  @override
+  void initState() {
+    _selectedDate = widget.selectedDate;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,7 +55,7 @@ class _PaymentDateState extends State<PaymentDate> {
                   borderRadius: BorderRadius.all(Radius.circular(40.0)),
                 ),
                 child: Text(
-                  DateFormat.yMMMMd().format(widget.selectedDate),
+                  DateFormat.yMMMMd().format(_selectedDate),
                   style: TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
@@ -64,14 +72,14 @@ class _PaymentDateState extends State<PaymentDate> {
   _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
-      initialDate: widget.selectedDate,
+      initialDate: _selectedDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
     );
     if (picked != null && picked != widget.selectedDate)
       setState(() {
-        widget.selectedDate = picked;
-        widget.subscription.paymentDate = widget.selectedDate;
+        _selectedDate = picked;
+        widget.subscription.paymentDate = _selectedDate;
       });
   }
 }

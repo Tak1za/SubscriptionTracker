@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:subscriber/screens/home_screen.dart';
+import 'package:subscriber/state/state_manager.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,16 +17,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
-      child: MaterialApp(
-        title: 'Subscriber',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: _primaryColor,
-          accentColor: _accentColor,
-          scaffoldBackgroundColor: _formBackgroundColor,
-          selectedRowColor: _selectedColor,
+      child: ChangeNotifierProvider(
+        create: (context) => StateManager(),
+        child: MaterialApp(
+          title: 'Subscriber',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primaryColor: _primaryColor,
+            accentColor: _accentColor,
+            scaffoldBackgroundColor: _formBackgroundColor,
+            selectedRowColor: _selectedColor,
+          ),
+          home: HomeScreen(),
         ),
-        home: HomeScreen(),
       ),
     );
   }

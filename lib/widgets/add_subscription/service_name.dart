@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:subscriber/models/subscription.dart';
 
 class ServiceName extends StatelessWidget {
-  Subscription subscription;
-  FocusNode focusSubscriptionCost;
+  final Subscription subscription;
+  final FocusNode focusSubscriptionCost;
 
-  ServiceName({Key key, @required this.subscription, this.focusSubscriptionCost}): super(key: key);
+  ServiceName(
+      {Key key, @required this.subscription, this.focusSubscriptionCost})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 60.0,
       child: TextFormField(
+        // ignore: missing_return
         validator: (String value) {
           if (value.isEmpty) {
             return 'This is not a valid value';
