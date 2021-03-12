@@ -33,14 +33,11 @@ class AddSubscription extends StatelessWidget {
           elevation: 0.0,
         ),
         body: SingleChildScrollView(
-          child: Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                AddSubscriptionHeader(),
-                AddSubscriptionForm(),
-              ],
-            ),
+          child: Column(
+            children: <Widget>[
+              AddSubscriptionHeader(),
+              AddSubscriptionForm(),
+            ],
           ),
         ),
       ),

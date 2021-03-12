@@ -27,7 +27,7 @@ class AddSubscriptionForm extends StatelessWidget {
       ),
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 50.0),
+        padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 30.0),
         child: Form(
           key: _formKey,
           child: Column(
@@ -51,7 +51,7 @@ class AddSubscriptionForm extends StatelessWidget {
                 selectedSubscriptionPeriod: _selectedSubscriptionPeriod,
                 subscription: subscription,
               ),
-              SizedBox(height: 50.0),
+              SizedBox(height: 30.0),
               SubmitButton(
                 formKey: _formKey,
                 selectedDate: _selectedDate,

@@ -6,18 +6,18 @@ import 'package:subscriber/widgets/all_subscriptions/subscription_card.dart';
 class AllSubscriptionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        child: Consumer<StateManager>(
-          builder: (context, stateManager, _) => ListView.builder(
-            scrollDirection: Axis.vertical,
-            itemCount: stateManager.allSubscriptions.length,
-            itemBuilder: (BuildContext context, int index) {
-              return SubscriptionCard(
-                subscription: stateManager.allSubscriptions[index].serviceName,
-              );
-            },
-          ),
+    return Container(
+      child: Consumer<StateManager>(
+        builder: (context, stateManager, _) => ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          itemCount: stateManager.allSubscriptions.length,
+          itemBuilder: (BuildContext context, int index) {
+            return SubscriptionCard(
+              subscription: stateManager.allSubscriptions[index].serviceName,
+            );
+          },
         ),
       ),
     );
