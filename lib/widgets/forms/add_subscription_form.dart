@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:subscriber/models/subscription.dart';
-import 'package:subscriber/widgets/add_subscription/payment_date.dart';
-import 'package:subscriber/widgets/add_subscription/service_name.dart';
-import 'package:subscriber/widgets/add_subscription/submit_button.dart';
-import 'package:subscriber/widgets/add_subscription/subscription_cost.dart';
-import 'package:subscriber/widgets/add_subscription/subscription_period_widget.dart';
+
+import 'add_subscription_form_fields/payment_date.dart';
+import 'add_subscription_form_fields/service_name.dart';
+import 'add_subscription_form_fields/submit_button.dart';
+import 'add_subscription_form_fields/subscription_cost.dart';
+import 'add_subscription_form_fields/subscription_period_widget.dart';
 
 class AddSubscriptionForm extends StatelessWidget {
   final focusSubscriptionCost = FocusNode();
