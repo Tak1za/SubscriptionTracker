@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:subscriber/database/database.dart';
 import 'package:subscriber/models/subscription.dart';
 
-class StateManager extends ChangeNotifier {
+class SubscriptionManager extends ChangeNotifier {
   List<Subscription> _allSubscriptions = [];
 
   Future<List<Subscription>> getAllSubscriptions() async {

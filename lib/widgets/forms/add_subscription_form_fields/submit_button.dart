@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subscriber/models/subscription.dart';
-import 'package:subscriber/state/state_manager.dart';
+import 'package:subscriber/state/service_manager.dart';
+import 'package:subscriber/state/subscription_manager.dart';
 
 class SubmitButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -22,7 +23,8 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var stateManager = Provider.of<StateManager>(context, listen: false);
+    var subscriptionManager = Provider.of<SubscriptionManager>(context, listen: false);
+    var serviceManager = Provider.of<ServiceManager>(context, listen: false);
     return Container(
       width: double.infinity,
       height: 50.0,
@@ -30,7 +32,8 @@ class SubmitButton extends StatelessWidget {
         onPressed: () {
           if (formKey.currentState.validate()) {
             formKey.currentState.save();
-            stateManager.addSubscription(subscription);
+            subscriptionManager.addSubscription(subscription);
+            serviceManager.markPicked(subscription.serviceName);
             Navigator.pop(context);
           }
         },

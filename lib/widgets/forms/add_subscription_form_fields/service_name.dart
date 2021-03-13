@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_pickers/helpers/show_scroll_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:subscriber/models/subscription.dart';
+import 'package:subscriber/state/service_manager.dart';
 
 class ServiceName extends StatefulWidget {
   final Subscription subscription;
   final String serviceName;
 
-  ServiceName(
-      {Key key, @required this.subscription, this.serviceName})
+  ServiceName({Key key, @required this.subscription, this.serviceName})
       : super(key: key);
 
   @override
@@ -16,14 +17,6 @@ class ServiceName extends StatefulWidget {
 }
 
 class _ServiceNameState extends State<ServiceName> {
-  final List<String> _serviceNames = <String>[
-    "Amazon Prime",
-    "Google One",
-    "Disney+ Hotstar",
-    "Netflix",
-    "Zee5",
-    "Xbox",
-  ];
   String _selectedService;
 
   @override
@@ -36,23 +29,25 @@ class _ServiceNameState extends State<ServiceName> {
   Widget build(BuildContext context) {
     return Container(
       height: 60.0,
-      child: GestureDetector(
-        onTap: () => _servicePicker(context),
-        child: Container(
-          height: 50.0,
-          padding: EdgeInsets.only(left: 20.0),
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(context).accentColor,
+      child: Consumer<ServiceManager>(
+        builder: (context, serviceManager, _) => GestureDetector(
+          onTap: () => _servicePicker(context, serviceManager),
+          child: Container(
+            height: 50.0,
+            padding: EdgeInsets.only(left: 20.0),
+            alignment: Alignment.centerLeft,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Theme.of(context).accentColor,
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(40.0)),
             ),
-            borderRadius: BorderRadius.all(Radius.circular(40.0)),
-          ),
-          child: Text(
-            _selectedService,
-            style: TextStyle(
-              fontSize: 20.0,
-              color: Colors.white,
+            child: Text(
+              _selectedService,
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.white,
+              ),
             ),
           ),
         ),
@@ -60,11 +55,11 @@ class _ServiceNameState extends State<ServiceName> {
     );
   }
 
-  _servicePicker(BuildContext context) async {
+  _servicePicker(BuildContext context, ServiceManager serviceManager) async {
     showMaterialScrollPicker(
       context: context,
       title: "Services",
-      items: _serviceNames,
+      items: serviceManager.allServices,
       selectedItem: widget.serviceName,
       onChanged: (value) => setState(() {
         _selectedService = value;
