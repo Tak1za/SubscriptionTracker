@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subscriber/state/subscription_manager.dart';
 import 'package:subscriber/widgets/all_subscriptions/subscription_card.dart';
+import 'package:subscriber/widgets/start_adding.dart';
 
 class AllSubscriptionList extends StatelessWidget {
   @override
@@ -12,6 +13,9 @@ class AllSubscriptionList extends StatelessWidget {
           future: subscriptionManager.getAllSubscriptions(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+              if (subscriptionManager.allSubscriptions.length == 0) {
+                return StartAdding();
+              }
               return ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -20,7 +24,7 @@ class AllSubscriptionList extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return SubscriptionCard(
                     subscription:
-                    subscriptionManager.allSubscriptions[index].serviceName,
+                        subscriptionManager.allSubscriptions[index].serviceName,
                   );
                 },
               );

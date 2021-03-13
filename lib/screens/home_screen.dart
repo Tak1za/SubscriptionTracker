@@ -55,14 +55,17 @@ class HomeScreen extends StatelessWidget {
             )
           ],
         ),
-        body: Align(
-          alignment: Alignment.topCenter,
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                AllSubscriptionsHeader(),
-                AllSubscriptionList(),
-              ],
+        body: Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  AllSubscriptionsHeader(),
+                  AllSubscriptionList(),
+                ],
+              ),
             ),
           ),
         ),
