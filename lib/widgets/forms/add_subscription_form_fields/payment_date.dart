@@ -79,7 +79,7 @@ class _PaymentDateState extends State<PaymentDate> {
     if (picked != null && picked != widget.selectedDate)
       setState(() {
         _selectedDate = picked;
-        widget.subscription.paymentDate = _selectedDate;
+        widget.subscription.paymentDate = _selectedDate.toString();
       });
   }
 }
