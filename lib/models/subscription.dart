@@ -27,12 +27,3 @@ class Subscription {
         subscriptionPeriod: map["period"],
       );
 }
-
-enum SubscriptionPeriod {
-  Daily,
-  Alternate,
-  Weekly,
-  Monthly,
-  Biannual,
-  Annually
-}

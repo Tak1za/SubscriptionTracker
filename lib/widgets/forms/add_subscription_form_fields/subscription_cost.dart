@@ -4,12 +4,10 @@ import 'package:subscriber/models/subscription.dart';
 
 class SubscriptionCost extends StatelessWidget {
   final Subscription subscription;
-  final FocusNode focusSubscriptionCost;
 
   SubscriptionCost({
     Key key,
     @required this.subscription,
-    this.focusSubscriptionCost,
   }) : super(key: key);
 
   @override
@@ -41,7 +39,6 @@ class SubscriptionCost extends StatelessWidget {
               onSaved: (String value) {
                 subscription.subscriptionCost = int.tryParse(value);
               },
-              focusNode: focusSubscriptionCost,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(

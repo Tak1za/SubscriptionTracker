@@ -6,6 +6,7 @@ import 'package:subscriber/state/state_manager.dart';
 
 class SubmitButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
+  final String selectedService;
   final Subscription subscription;
   final DateTime selectedDate;
   final String selectedSubscriptionPeriod;
@@ -13,6 +14,7 @@ class SubmitButton extends StatelessWidget {
   SubmitButton({
     Key key,
     @required this.formKey,
+    this.selectedService,
     this.selectedDate,
     this.selectedSubscriptionPeriod,
     this.subscription,

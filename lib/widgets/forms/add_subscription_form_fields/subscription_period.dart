@@ -3,22 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_pickers/helpers/show_scroll_picker.dart';
 import 'package:subscriber/models/subscription.dart';
 
-class SubscriptionPeriodWidget extends StatefulWidget {
+class SubscriptionPeriod extends StatefulWidget {
   final String selectedSubscriptionPeriod;
   final Subscription subscription;
 
-  SubscriptionPeriodWidget({
+  SubscriptionPeriod({
     Key key,
     this.selectedSubscriptionPeriod,
     @required this.subscription,
   }) : super(key: key);
 
   @override
-  _SubscriptionPeriodWidgetState createState() =>
-      _SubscriptionPeriodWidgetState();
+  _SubscriptionPeriodState createState() =>
+      _SubscriptionPeriodState();
 }
 
-class _SubscriptionPeriodWidgetState extends State<SubscriptionPeriodWidget> {
+class _SubscriptionPeriodState extends State<SubscriptionPeriod> {
   final List<String> _subscriptionPeriods = <String>[
     "Daily",
     "Alternate",

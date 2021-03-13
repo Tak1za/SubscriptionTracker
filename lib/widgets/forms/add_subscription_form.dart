@@ -6,12 +6,12 @@ import 'add_subscription_form_fields/payment_date.dart';
 import 'add_subscription_form_fields/service_name.dart';
 import 'add_subscription_form_fields/submit_button.dart';
 import 'add_subscription_form_fields/subscription_cost.dart';
-import 'add_subscription_form_fields/subscription_period_widget.dart';
+import 'add_subscription_form_fields/subscription_period.dart';
 
 class AddSubscriptionForm extends StatelessWidget {
-  final focusSubscriptionCost = FocusNode();
   final DateTime _selectedDate = DateTime.now();
   final String _selectedSubscriptionPeriod = "Monthly";
+  final String _selectedService = "Pick a service...";
   final _formKey = GlobalKey<FormState>();
   final Subscription subscription = Subscription();
 
@@ -35,12 +35,11 @@ class AddSubscriptionForm extends StatelessWidget {
             children: <Widget>[
               ServiceName(
                 subscription: subscription,
-                focusSubscriptionCost: focusSubscriptionCost,
+                serviceName: _selectedService
               ),
               SizedBox(height: 20.0),
               SubscriptionCost(
                 subscription: subscription,
-                focusSubscriptionCost: focusSubscriptionCost,
               ),
               SizedBox(height: 30.0),
               PaymentDate(
@@ -48,13 +47,14 @@ class AddSubscriptionForm extends StatelessWidget {
                 subscription: subscription,
               ),
               SizedBox(height: 30.0),
-              SubscriptionPeriodWidget(
+              SubscriptionPeriod(
                 selectedSubscriptionPeriod: _selectedSubscriptionPeriod,
                 subscription: subscription,
               ),
               SizedBox(height: 30.0),
               SubmitButton(
                 formKey: _formKey,
+                selectedService: _selectedService,
                 selectedDate: _selectedDate,
                 selectedSubscriptionPeriod: _selectedSubscriptionPeriod,
                 subscription: subscription,
