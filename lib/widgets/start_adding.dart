@@ -40,10 +40,10 @@ class StartAdding extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(20.0),
           child: Text(
-            "Start by tapping here",
+            "Start by tapping here or swiping left",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 20.0,
+              fontSize: 15.0,
               fontWeight: FontWeight.bold,
             ),
           ),
