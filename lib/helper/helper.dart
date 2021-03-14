@@ -100,7 +100,7 @@ String calculateUpcomingPaymentDate(Subscription subscription) {
               .toString();
       break;
   }
-  return DateFormat.yMMMMEEEEd().format(DateTime.parse(nextPaymentDate));
+  return DateFormat.yMMMMd().format(DateTime.parse(nextPaymentDate));
 }
 
 String getSelectedServiceImagePath(

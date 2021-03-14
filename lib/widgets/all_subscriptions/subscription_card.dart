@@ -3,8 +3,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:subscriber/models/subscription.dart';
-import 'package:subscriber/state/service_manager.dart';
-import 'package:provider/provider.dart';
 
 class SubscriptionCard extends StatelessWidget {
   final Subscription subscription;
@@ -39,29 +37,34 @@ class SubscriptionCard extends StatelessWidget {
               padding: EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    subscription.serviceName,
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.white70,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        subscription.serviceName,
+                        style: TextStyle(
+                          fontSize: 25.0,
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "₹" + subscription.subscriptionCost.toString(),
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                   Text(
-                    "₹" + subscription.subscriptionCost.toString(),
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.white70,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "Upcoming payment date: " + subscription.nextPaymentDate,
+                    "Next payment date: " + subscription.nextPaymentDate,
                     style: TextStyle(
                       fontSize: 15.0,
                       color: Colors.white70,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
