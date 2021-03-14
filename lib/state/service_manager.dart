@@ -8,7 +8,7 @@ class ServiceManager extends ChangeNotifier {
     "Disney+ Hotstar": new Service(name: "Disney+ Hotstar", imagePath: "assets/images/DisneyHotstar.jpg"),
     "Zee5": new Service(name: "Zee5", imagePath: "assets/images/Zee5.jpg"),
     "Netflix": new Service(name: "Netflix", imagePath: "assets/images/Netflix.png"),
-    "Xbox": new Service(name: "Xbox", imagePath: "assets/images/Xbox.png"),
+    "Xbox": new Service(name: "Xbox", imagePath: "assets/images/Xbox.jpeg"),
     "Spotify": new Service(name: "Spotify", imagePath: "assets/images/Spotify.jpg"),
   };
 

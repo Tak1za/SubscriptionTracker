@@ -4,6 +4,7 @@ import 'package:flutter_material_pickers/helpers/show_scroll_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:subscriber/models/subscription.dart';
 import 'package:subscriber/state/service_manager.dart';
+import 'package:subscriber/state/subscription_manager.dart';
 
 class ServiceName extends StatefulWidget {
   final Subscription subscription;
@@ -29,9 +30,11 @@ class _ServiceNameState extends State<ServiceName> {
   Widget build(BuildContext context) {
     return Container(
       height: 60.0,
-      child: Consumer<ServiceManager>(
-        builder: (context, serviceManager, _) => GestureDetector(
-          onTap: () => _servicePicker(context, serviceManager),
+      child: Consumer2<ServiceManager, SubscriptionManager>(
+        builder: (context, serviceManager, subscriptionManager, _) =>
+            GestureDetector(
+          onTap: () =>
+              _servicePicker(context, serviceManager, subscriptionManager),
           child: Container(
             height: 50.0,
             padding: EdgeInsets.only(left: 20.0),
@@ -55,11 +58,17 @@ class _ServiceNameState extends State<ServiceName> {
     );
   }
 
-  _servicePicker(BuildContext context, ServiceManager serviceManager) async {
+  _servicePicker(BuildContext context, ServiceManager serviceManager,
+      SubscriptionManager subscriptionManager) async {
+    var serviceItems = serviceManager.allServices.keys.where((service) {
+      return !subscriptionManager.allSubscriptions
+          .any((subscription) => subscription.serviceName == service);
+    }).toList();
+
     showMaterialScrollPicker(
       context: context,
       title: "Services",
-      items: serviceManager.allServices.keys.toList(),
+      items: serviceItems,
       selectedItem: widget.serviceName,
       onChanged: (value) => setState(() {
         _selectedService = value;

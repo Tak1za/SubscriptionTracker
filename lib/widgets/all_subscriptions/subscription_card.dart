@@ -30,6 +30,9 @@ class SubscriptionCard extends StatelessWidget {
           ),
         ),
         child: ClipRRect(
+          borderRadius: BorderRadius.all(
+            Radius.circular(20.0),
+          ),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Padding(
