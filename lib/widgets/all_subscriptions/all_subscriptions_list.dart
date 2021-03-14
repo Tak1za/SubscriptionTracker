@@ -24,7 +24,7 @@ class AllSubscriptionList extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return SubscriptionCard(
                     subscription:
-                        subscriptionManager.allSubscriptions[index].serviceName,
+                        subscriptionManager.allSubscriptions[index],
                   );
                 },
               );

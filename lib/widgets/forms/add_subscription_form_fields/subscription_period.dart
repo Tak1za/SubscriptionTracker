@@ -24,7 +24,6 @@ class _SubscriptionPeriodState extends State<SubscriptionPeriod> {
     "Alternate",
     "Weekly",
     "Monthly",
-    "Biannual",
     "Annually",
   ];
   String _selectedSubscriptionPeriod;
