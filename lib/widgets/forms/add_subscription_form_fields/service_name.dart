@@ -59,7 +59,7 @@ class _ServiceNameState extends State<ServiceName> {
     showMaterialScrollPicker(
       context: context,
       title: "Services",
-      items: serviceManager.allServices,
+      items: serviceManager.allServices.keys.toList(),
       selectedItem: widget.serviceName,
       onChanged: (value) => setState(() {
         _selectedService = value;

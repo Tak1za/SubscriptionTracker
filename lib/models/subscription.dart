@@ -4,6 +4,7 @@ class Subscription {
   String paymentDate;
   String subscriptionPeriod;
   String nextPaymentDate;
+  String imagePath;
 
   Subscription({
     this.serviceName,
@@ -11,6 +12,7 @@ class Subscription {
     String paymentDate,
     this.subscriptionPeriod = "Monthly",
     this.nextPaymentDate,
+    this.imagePath,
   }) : paymentDate = paymentDate ?? DateTime.now().toString();
 
   Map<String, dynamic> toMap() {
@@ -20,6 +22,7 @@ class Subscription {
       "paymentDate": paymentDate,
       "period": subscriptionPeriod,
       "nextPaymentDate": nextPaymentDate,
+      "imagePath": imagePath,
     };
   }
 
@@ -29,5 +32,6 @@ class Subscription {
         paymentDate: map["paymentDate"],
         subscriptionPeriod: map["period"],
         nextPaymentDate: map["nextPaymentDate"],
+        imagePath: map["imagePath"],
       );
 }

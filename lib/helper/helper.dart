@@ -102,3 +102,10 @@ String calculateUpcomingPaymentDate(Subscription subscription) {
   }
   return DateFormat.yMMMMEEEEd().format(DateTime.parse(nextPaymentDate));
 }
+
+String getSelectedServiceImagePath(
+    Subscription subscription, dynamic services) {
+  var currentService = services
+      .firstWhere((element) => element.name == subscription.serviceName);
+  return currentService.imagePath;
+}

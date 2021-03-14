@@ -26,7 +26,7 @@ class DBProvider {
         ),
         version: 1, onCreate: (db, version) async {
       await db.execute(
-        "CREATE TABLE subscriptions (service TEXT PRIMARY KEY, cost INTEGER, paymentDate TEXT, period TEXT, nextPaymentDate TEXT)",
+        "CREATE TABLE subscriptions (service TEXT PRIMARY KEY, cost INTEGER, paymentDate TEXT, period TEXT, nextPaymentDate TEXT, imagePath TEXT)",
       );
     });
   }

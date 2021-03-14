@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:subscriber/helper/helper.dart';
 import 'package:subscriber/models/subscription.dart';
@@ -37,6 +36,7 @@ class SubmitButton extends StatelessWidget {
             formKey.currentState.save();
             subscription.nextPaymentDate =
                 calculateUpcomingPaymentDate(subscription);
+            subscription.imagePath = getSelectedServiceImagePath(subscription, serviceManager.allServices.values);
             subscriptionManager.addSubscription(subscription);
             serviceManager.markPicked(subscription.serviceName);
             Navigator.pop(context);
