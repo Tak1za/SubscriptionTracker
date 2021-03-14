@@ -3,13 +3,15 @@ class Subscription {
   int subscriptionCost;
   String paymentDate;
   String subscriptionPeriod;
+  String nextPaymentDate;
 
-  Subscription(
-      {this.serviceName,
-      this.subscriptionCost,
-      String paymentDate,
-      this.subscriptionPeriod = "Monthly"})
-      : paymentDate = paymentDate ?? DateTime.now().toString();
+  Subscription({
+    this.serviceName,
+    this.subscriptionCost,
+    String paymentDate,
+    this.subscriptionPeriod = "Monthly",
+    this.nextPaymentDate,
+  }) : paymentDate = paymentDate ?? DateTime.now().toString();
 
   Map<String, dynamic> toMap() {
     return {
@@ -17,6 +19,7 @@ class Subscription {
       "cost": subscriptionCost,
       "paymentDate": paymentDate,
       "period": subscriptionPeriod,
+      "nextPaymentDate": nextPaymentDate,
     };
   }
 
@@ -25,5 +28,6 @@ class Subscription {
         subscriptionCost: map["cost"],
         paymentDate: map["paymentDate"],
         subscriptionPeriod: map["period"],
+        nextPaymentDate: map["nextPaymentDate"],
       );
 }
