@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subscriber/state/subscription_manager.dart';
-import 'package:subscriber/widgets/all_subscriptions/subscription_card.dart';
+import 'package:subscriber/widgets/all_subscriptions/all_subscriptions_list_item.dart';
 import 'package:subscriber/widgets/start_adding.dart';
 
 class AllSubscriptionList extends StatelessWidget {
@@ -22,7 +22,7 @@ class AllSubscriptionList extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 itemCount: subscriptionManager.allSubscriptions.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return SubscriptionCard(
+                  return AllSubscriptionsListItem(
                     subscription:
                         subscriptionManager.allSubscriptions[index],
                   );

@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:subscriber/models/subscription.dart';
 
-class SubscriptionCard extends StatelessWidget {
+class AllSubscriptionsListItem extends StatelessWidget {
   final Subscription subscription;
 
-  SubscriptionCard({Key key, @required this.subscription}) : super(key: key);
+  AllSubscriptionsListItem({Key key, @required this.subscription}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
