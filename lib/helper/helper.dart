@@ -13,16 +13,13 @@ String calculateUpcomingPaymentDate(Subscription subscription) {
     case "Daily":
       nextPaymentDate = paymentDate.add(Duration(days: 1)).toString();
       break;
-    case "Alternate":
-      nextPaymentDate = paymentDate.add(Duration(days: 2)).toString();
-      break;
     case "Weekly":
       nextPaymentDate = paymentDate.add(Duration(days: 7)).toString();
       break;
     case "Monthly":
       var daysToAdd = 0;
       var nextMonth =
-      (currentMonth + 1) % 12 == 0 ? 12 : (currentMonth + 1) % 12;
+          (currentMonth + 1) % 12 == 0 ? 12 : (currentMonth + 1) % 12;
       if (currentMonth == 2) {
         // subscription started in february, next month will always be march with 31 days
         if (currentYear % 4 == 0) {
@@ -48,7 +45,7 @@ String calculateUpcomingPaymentDate(Subscription subscription) {
             // if non leap year
             daysToAdd = 28;
           }
-        } else if (currentDate == 30){
+        } else if (currentDate == 30) {
           if (currentYear % 4 == 0) {
             // if leap year
             daysToAdd = 30;
@@ -73,7 +70,7 @@ String calculateUpcomingPaymentDate(Subscription subscription) {
 
       nextPaymentDate = paymentDate.add(Duration(days: daysToAdd)).toString();
       break;
-    case "Annually":
+    case "Yearly":
       if (currentMonth == 2) {
         // if its February
         if (currentYear % 4 == 0) {
@@ -94,10 +91,9 @@ String calculateUpcomingPaymentDate(Subscription subscription) {
           }
         }
       }
-      nextPaymentDate =
-          DateTime.utc(currentYear + 1, currentMonth, currentDate)
-              .toLocal()
-              .toString();
+      nextPaymentDate = DateTime.utc(currentYear + 1, currentMonth, currentDate)
+          .toLocal()
+          .toString();
       break;
   }
   return DateFormat.yMMMMd().format(DateTime.parse(nextPaymentDate));

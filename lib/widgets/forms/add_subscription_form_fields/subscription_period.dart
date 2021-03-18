@@ -14,17 +14,15 @@ class SubscriptionPeriod extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SubscriptionPeriodState createState() =>
-      _SubscriptionPeriodState();
+  _SubscriptionPeriodState createState() => _SubscriptionPeriodState();
 }
 
 class _SubscriptionPeriodState extends State<SubscriptionPeriod> {
   final List<String> _subscriptionPeriods = <String>[
     "Daily",
-    "Alternate",
     "Weekly",
     "Monthly",
-    "Annually",
+    "Yearly",
   ];
   String _selectedSubscriptionPeriod;
 
