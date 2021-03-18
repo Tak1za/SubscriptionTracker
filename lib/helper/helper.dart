@@ -1,3 +1,4 @@
+import 'package:device_calendar/device_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:subscriber/models/subscription.dart';
 
@@ -104,4 +105,69 @@ String getSelectedServiceImagePath(
   var currentService = services
       .firstWhere((element) => element.name == subscription.serviceName);
   return currentService.imagePath;
+}
+
+Future<List<Calendar>> getCalendars(
+    DeviceCalendarPlugin deviceCalendarPlugin) async {
+  var _calendars;
+  try {
+    var arePermissionsGranted = await deviceCalendarPlugin.hasPermissions();
+    if (arePermissionsGranted.isSuccess && !arePermissionsGranted.data) {
+      arePermissionsGranted = await deviceCalendarPlugin.requestPermissions();
+      if (!arePermissionsGranted.isSuccess || !arePermissionsGranted.data) {
+        return List.empty();
+      }
+    }
+    final calendarsResult = await deviceCalendarPlugin.retrieveCalendars();
+    _calendars = calendarsResult?.data;
+    if (_calendars.isEmpty || calendarsResult.errorMessages.length > 0) {
+      return List.empty();
+    }
+    var result =
+        _calendars?.where((c) => !c.isReadOnly)?.toList() ?? <Calendar>[];
+    return result;
+  } catch (e) {
+    print(e.toString());
+    return null;
+  }
+}
+
+Future<Result<String>> addEventToCalendar(
+    Calendar calendar,
+    Subscription subscription,
+    DeviceCalendarPlugin deviceCalendarPlugin) async {
+  var recurrenceFrequency = getRecurrenceFrequency(subscription);
+  var startDate =
+      new DateFormat.yMMMMd('en_US').parse(subscription.nextPaymentDate);
+  var endDate = new DateFormat.yMMMMd('en_US')
+      .parse(subscription.nextPaymentDate)
+      .add(Duration(days: 1));
+  var event = new Event(
+    calendar.id,
+    title: subscription.serviceName + " Subscription",
+    start: startDate,
+    end: endDate,
+    recurrenceRule: RecurrenceRule(recurrenceFrequency),
+    allDay: true,
+  );
+  event.reminders = getReminderList(subscription);
+  var result = await deviceCalendarPlugin.createOrUpdateEvent(event);
+  return result;
+}
+
+getRecurrenceFrequency(Subscription subscription) {
+  switch (subscription.subscriptionPeriod) {
+    case "Daily":
+      return RecurrenceFrequency.Daily;
+    case "Weekly":
+      return RecurrenceFrequency.Weekly;
+    case "Monthly":
+      return RecurrenceFrequency.Monthly;
+    case "Yearly":
+      return RecurrenceFrequency.Yearly;
+  }
+}
+
+List<Reminder> getReminderList(Subscription subscription) {
+  return [Reminder(minutes: 60)];
 }

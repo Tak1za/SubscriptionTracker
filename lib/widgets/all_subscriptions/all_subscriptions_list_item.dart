@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:subscriber/helper/helper.dart';
 import 'package:subscriber/models/subscription.dart';
 
 class AllSubscriptionsListItem extends StatefulWidget {
@@ -19,9 +19,13 @@ class AllSubscriptionsListItem extends StatefulWidget {
 
 class _AllSubscriptionsListItemState extends State<AllSubscriptionsListItem> {
   DeviceCalendarPlugin _deviceCalendarPlugin;
+  Subscription _subscription;
 
-  _AllSubscriptionsListItemState() {
+  @override
+  void initState() {
+    _subscription = widget.subscription;
     _deviceCalendarPlugin = DeviceCalendarPlugin();
+    super.initState();
   }
 
   @override
@@ -38,7 +42,7 @@ class _AllSubscriptionsListItemState extends State<AllSubscriptionsListItem> {
           decoration: BoxDecoration(
             image: new DecorationImage(
               image: new ExactAssetImage(
-                widget.subscription.imagePath,
+                _subscription.imagePath,
               ),
               fit: BoxFit.cover,
             ),
@@ -62,7 +66,7 @@ class _AllSubscriptionsListItemState extends State<AllSubscriptionsListItem> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.subscription.serviceName,
+                          _subscription.serviceName,
                           style: TextStyle(
                             fontSize: 25.0,
                             color: Colors.white70,
@@ -70,7 +74,7 @@ class _AllSubscriptionsListItemState extends State<AllSubscriptionsListItem> {
                           ),
                         ),
                         Text(
-                          "₹" + widget.subscription.subscriptionCost.toString(),
+                          "₹" + _subscription.subscriptionCost.toString(),
                           style: TextStyle(
                             fontSize: 20.0,
                             color: Colors.white70,
@@ -80,8 +84,7 @@ class _AllSubscriptionsListItemState extends State<AllSubscriptionsListItem> {
                       ],
                     ),
                     Text(
-                      "Next payment date: " +
-                          widget.subscription.nextPaymentDate,
+                      "Next payment date: " + _subscription.nextPaymentDate,
                       style: TextStyle(
                         fontSize: 15.0,
                         color: Colors.white70,
@@ -103,13 +106,14 @@ class _AllSubscriptionsListItemState extends State<AllSubscriptionsListItem> {
       child: Text('No'),
     );
 
-    var calendars = await getCalendars();
+    var calendars = await getCalendars(_deviceCalendarPlugin);
 
     Widget yesButton = TextButton(
       onPressed: () async {
         ScaffoldMessengerState scaffoldMessenger =
             ScaffoldMessenger.of(context);
-        var result = await addEventToCalendar(calendars.first);
+        var result = await addEventToCalendar(
+            calendars.first, _subscription, _deviceCalendarPlugin);
         Navigator.pop(context);
         ScaffoldFeatureController controller;
         if (result.isSuccess) {
@@ -129,9 +133,9 @@ class _AllSubscriptionsListItemState extends State<AllSubscriptionsListItem> {
     AlertDialog alert = AlertDialog(
       title: Text("Add Reminder"),
       content: Text("Set " +
-          widget.subscription.subscriptionPeriod.toLowerCase() +
+          _subscription.subscriptionPeriod.toLowerCase() +
           " reminder for " +
-          widget.subscription.nextPaymentDate +
+          _subscription.nextPaymentDate +
           "?"),
       actions: [
         yesButton,
@@ -145,62 +149,5 @@ class _AllSubscriptionsListItemState extends State<AllSubscriptionsListItem> {
         return alert;
       },
     );
-  }
-
-  Future<List<Calendar>> getCalendars() async {
-    var _calendars;
-    try {
-      var arePermissionsGranted = await _deviceCalendarPlugin.hasPermissions();
-      if (arePermissionsGranted.isSuccess && !arePermissionsGranted.data) {
-        arePermissionsGranted =
-            await _deviceCalendarPlugin.requestPermissions();
-        if (!arePermissionsGranted.isSuccess || !arePermissionsGranted.data) {
-          return List.empty();
-        }
-      }
-      final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
-      _calendars = calendarsResult?.data;
-      if (_calendars.isEmpty || calendarsResult.errorMessages.length > 0) {
-        return List.empty();
-      }
-      var result =
-          _calendars?.where((c) => !c.isReadOnly)?.toList() ?? <Calendar>[];
-      return result;
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
-
-  Future<Result<String>> addEventToCalendar(Calendar calendar) async {
-    var recurrenceFrequency = getRecurrenceFrequency();
-    var startDate = new DateFormat.yMMMMd('en_US')
-        .parse(widget.subscription.nextPaymentDate);
-    var endDate = new DateFormat.yMMMMd('en_US')
-        .parse(widget.subscription.nextPaymentDate)
-        .add(Duration(days: 1));
-    var event = new Event(
-      calendar.id,
-      title: widget.subscription.serviceName,
-      start: startDate,
-      end: endDate,
-      recurrenceRule: RecurrenceRule(recurrenceFrequency),
-      allDay: true,
-    );
-    var result = await _deviceCalendarPlugin.createOrUpdateEvent(event);
-    return result;
-  }
-
-  getRecurrenceFrequency() {
-    switch (widget.subscription.subscriptionPeriod) {
-      case "Daily":
-        return RecurrenceFrequency.Daily;
-      case "Weekly":
-        return RecurrenceFrequency.Weekly;
-      case "Monthly":
-        return RecurrenceFrequency.Monthly;
-      case "Yearly":
-        return RecurrenceFrequency.Yearly;
-    }
   }
 }
